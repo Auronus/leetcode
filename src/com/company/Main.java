@@ -8,6 +8,7 @@ public class Main {
         executeEx88();
         executeEx349();
         executeEx435();
+        executeEx1();
     }
 
     private static void executeEx88() {
@@ -29,11 +30,21 @@ public class Main {
 
     private static void executeEx435() {
         System.out.println("Execute exercise 435");
-        System.out.println("Result output: " + new Ex435().eraseOverlapIntervals(new int[][]{{1,2},{2,3},{3,4},{1,3}}));
+        System.out.println("Result output: " + new Ex435().eraseOverlapIntervals(new int[][]{{1, 2}, {2, 3}, {3, 4}, {1, 3}}));
         System.out.println();
-        System.out.println("Result output: " + new Ex435().eraseOverlapIntervals(new int[][]{{1,2},{2,3},{3,4},{1,3}}));
+        System.out.println("Result output: " + new Ex435().eraseOverlapIntervals(new int[][]{{1, 2}, {2, 3}, {3, 4}, {1, 3}}));
         System.out.println();
-        System.out.println("Result output: " + new Ex435().eraseOverlapIntervals(new int[][]{{1,2},{2,3},{3,4},{1,3}}));
+        System.out.println("Result output: " + new Ex435().eraseOverlapIntervals(new int[][]{{1, 2}, {2, 3}, {3, 4}, {1, 3}}));
+        System.out.println();
+    }
+
+    private static void executeEx1() {
+        System.out.println("Execute exercise 1");
+        System.out.println("Result output: " + new TwoSum().twoSumHashMap(new int[]{2, 7, 11, 15}, 9));
+        System.out.println();
+        System.out.println("Result output: " + new TwoSum().twoSumHashMap(new int[]{3, 2, 4}, 6));
+        System.out.println();
+        System.out.println("Result output: " + new TwoSum().twoSumHashMap(new int[]{3, 3}, 6));
         System.out.println();
     }
 }
