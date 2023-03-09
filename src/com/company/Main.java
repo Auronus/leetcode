@@ -5,10 +5,22 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        executeEx88();
+        addElementsToDynamicArray();
+        /*executeEx88();
         executeEx349();
         executeEx435();
-        executeEx1();
+        executeEx1();*/
+    }
+
+    private static void addElementsToDynamicArray() {
+        DynamicArray<Integer> dynamicArray = new DynamicArray<>(10);
+        System.out.println(dynamicArray.size());
+        System.out.println(dynamicArray.add(10));
+        System.out.println(dynamicArray.add(20));
+        System.out.println(dynamicArray.size());
+        System.out.println(dynamicArray.get(0));
+        System.out.println(dynamicArray.remove(0));
+        System.out.println(dynamicArray.get(0));
     }
 
     private static void executeEx88() {
