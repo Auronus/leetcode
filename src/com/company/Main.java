@@ -1,14 +1,17 @@
 package com.company;
 
+import com.company.graph.Graph;
+import com.company.graph.Node;
 import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
-        executeEx88();
+        /*executeEx88();
         executeEx349();
         executeEx435();
-        executeEx1();
+        executeEx1();*/
+        bfs();
     }
 
     private static void executeEx88() {
@@ -46,5 +49,30 @@ public class Main {
         System.out.println();
         System.out.println("Result output: " + new TwoSum().twoSumHashMap(new int[]{3, 3}, 6));
         System.out.println();
+    }
+
+    private static void bfs() {
+        Graph graph = new Graph();
+
+        //Ну это кал какой-то
+        graph.addNode(new Node('A', 0));
+        graph.addNode(new Node('B', 1));
+        graph.addNode(new Node('C', 2));
+        graph.addNode(new Node('D', 3));
+        graph.addNode(new Node('E', 4));
+
+        graph.addEdge(0, 1);
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 4);
+        graph.addEdge(2, 3);
+        graph.addEdge(2, 4);
+        graph.addEdge(4, 0);
+        graph.addEdge(4, 2);
+
+        graph.print();
+
+        graph.breadthFirstSearch(0);
+        System.out.println();
+        graph.breadthFirstSearchVersion2(0);
     }
 }
