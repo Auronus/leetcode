@@ -52,11 +52,6 @@ public class DynamicArray<T> implements List<T> {
     }
 
     @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override
     public boolean remove(Object o) {
         return remove(indexOf(o)) != null;
     }
@@ -174,12 +169,43 @@ public class DynamicArray<T> implements List<T> {
 
     @Override
     public boolean retainAll(Collection c) {
-        return false;
+        Objects.requireNonNull(c);
+        return batchRemove(c, true);
     }
 
     @Override
     public boolean removeAll(Collection c) {
-        return false;
+        Objects.requireNonNull(c);
+        return batchRemove(c, false);
+    }
+
+    //Честно скопипастил, но до конца не осознал
+    private boolean batchRemove(Collection<?> c, boolean complement) {
+        final Object[] elementData = this.array;
+        int r = 0, w = 0;
+        boolean modified = false;
+        try {
+            for (; r < size; r++)
+                if (c.contains(elementData[r]) == complement)
+                    elementData[w++] = elementData[r];
+        } finally {
+            // Preserve behavioral compatibility with AbstractCollection,
+            // even if c.contains() throws.
+            if (r != size) {
+                System.arraycopy(elementData, r,
+                        elementData, w,
+                        size - r);
+                w += size - r;
+            }
+            if (w != size) {
+                // clear to let GC do its work
+                for (int i = w; i < size; i++)
+                    elementData[i] = null;
+                size = w;
+                modified = true;
+            }
+        }
+        return modified;
     }
 
     @Override
@@ -188,8 +214,18 @@ public class DynamicArray<T> implements List<T> {
     }
 
     @Override
-    public Object[] toArray(Object[] a) {
-        return new Object[0];
+    public Object[] toArray() {
+        return Arrays.copyOf(array, size);
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        if (a.length < size)
+            return (T[]) Arrays.copyOf(array, size, a.getClass());
+        System.arraycopy(array, 0, a, 0, size);
+        if (a.length > size)
+            a[size] = null;
+        return a;
     }
 
     T elementData(int index) {
