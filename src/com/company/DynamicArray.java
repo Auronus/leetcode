@@ -1,10 +1,7 @@
 package com.company;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
+import java.util.function.Consumer;
 
 public class DynamicArray<T> implements List<T> {
     private static final int DEFAULT_CAPACITY = 16;
@@ -51,7 +48,7 @@ public class DynamicArray<T> implements List<T> {
 
     @Override
     public Iterator iterator() {
-        return null;
+        return new MyIterator();
     }
 
     @Override
@@ -244,4 +241,39 @@ public class DynamicArray<T> implements List<T> {
         return "Index: " + index + ", Size: " + size;
     }
 
+    private class MyIterator implements Iterator<T> {
+        private int current;
+        private int prev = -1;
+
+        @Override
+        public boolean hasNext() {
+            return current != size;
+        }
+
+        @Override
+        public T next() {
+            int tempCurrent = current;
+            if (tempCurrent >= size) {
+                throw new NoSuchElementException();
+            }
+            current= tempCurrent +1;
+            prev = tempCurrent;
+            return elementData(prev);
+        }
+
+        @Override
+        public void remove() {
+            if (prev < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            DynamicArray.this.remove(prev);
+            current = prev;
+            prev--; //Вот тут не уловил почему должно быть -1
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super T> action) {
+            Iterator.super.forEachRemaining(action);
+        }
+    }
 }
