@@ -11,6 +11,9 @@ public class Node {
         this.data = data;
         this.indexInArray = indexInArray;
     }
+    public Node(char data) {
+        this.data = data;
+    }
 
     @Override
     public boolean equals(Object o) {

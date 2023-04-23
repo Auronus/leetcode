@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.graph.Graph;
+import com.company.graph.GraphV2;
 import com.company.graph.Node;
 import java.util.Arrays;
 
@@ -11,7 +12,7 @@ public class Main {
         executeEx349();
         executeEx435();
         executeEx1();*/
-        bfs();
+        bfsV2();
     }
 
     private static void executeEx88() {
@@ -74,5 +75,35 @@ public class Main {
         graph.breadthFirstSearch(0);
         System.out.println();
         graph.breadthFirstSearchVersion2(0);
+    }
+
+    private static void bfsV2() {
+        GraphV2 graph = new GraphV2();
+
+        Node nodeA = new Node('A');
+        Node nodeB = new Node('B');
+        Node nodeC = new Node('C');
+        Node nodeD = new Node('D');
+        Node nodeE = new Node('E');
+        //Ну это кал какой-то
+        graph.addNode(nodeA);
+        graph.addNode(nodeB);
+        graph.addNode(nodeC);
+        graph.addNode(nodeD);
+        graph.addNode(nodeE);
+
+        graph.addEdge(nodeA, nodeB);
+        graph.addEdge(nodeB, nodeC);
+        graph.addEdge(nodeB, nodeE);
+        graph.addEdge(nodeC, nodeD);
+        graph.addEdge(nodeC, nodeE);
+        graph.addEdge(nodeE, nodeA);
+        graph.addEdge(nodeE, nodeC);
+
+        graph.print();
+
+        graph.breadthFirstSearch(nodeA);
+        /*System.out.println();
+        graph.breadthFirstSearchVersion2(0);*/
     }
 }
